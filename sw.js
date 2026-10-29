@@ -1,4 +1,4 @@
-const CACHE_NAME = 'swipe-notes-v2';
+const CACHE_NAME = 'swipe-notes-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
