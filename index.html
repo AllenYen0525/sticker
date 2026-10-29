@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>滑動便利貼</title>
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#1e1e1e">
-  <link rel="apple-touch-icon" href="./icon.jpg">
-  <link rel="stylesheet" href="./style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>滑動便利貼</title>
+	<link rel="manifest" href="./manifest.json">
+	<meta name="theme-color" content="#1e1e1e">
+	<link rel="apple-touch-icon" href="./icon.jpg">
+	<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="app-container">
-    <header class="app-header">
-      <h1>Swipe Notes</h1>
-      <span id="card-indicator" class="indicator">1 / 1</span>
-    </header>
+	<div class="app-container">
+		<header class="app-header">
+			<h1>Swipe Notes</h1>
+			<span id="card-indicator" class="indicator">1 / 1</span>
+		</header>
 
-    <main class="card-viewport">
-      <div id="card-container" class="card-container">
-        <!-- 卡片會由 app.js 動態生成 -->
-      </div>
-    </main>
+		<main class="card-viewport">
+			<div id="card-container" class="card-container">
+				<!-- 卡片會由 app.js 動態生成 -->
+			</div>
+		</main>
 
-    <footer class="app-footer">
-      <div class="color-picker">
-        <button class="color-btn yellow active" data-color="#fff3a0"></button>
-        <button class="color-btn pink" data-color="#ff7eb9"></button>
-        <button class="color-btn green" data-color="#7afcff"></button>
-        <button class="color-btn blue" data-color="#94b9ff"></button>
-        <button class="color-btn dark" data-color="#2d2d2d"></button>
-      </div>
-      <div class="action-btns">
-        <button id="delete-btn" class="btn btn-delete">刪除卡片</button>
-        <button id="add-btn" class="btn btn-add">+ 新增便利貼</button>
-      </div>
-    </footer>
-  </div>
+		<footer class="app-footer">
+			<div class="color-picker">
+				<button class="color-btn yellow active" data-color="#fff3a0"></button>
+				<button class="color-btn pink" data-color="#ff7eb9"></button>
+				<button class="color-btn green" data-color="#7afcff"></button>
+				<button class="color-btn blue" data-color="#94b9ff"></button>
+				<button class="color-btn dark" data-color="#2d2d2d"></button>
+			</div>
 
-  <script src="./app.js"></script>
+			<div class="action-btns">
+				<button id="delete-btn" class="btn btn-delete">刪除卡片</button>
+				<button id="add-btn" class="btn btn-add">+ 新增便利貼</button>
+			</div>
+
+			<div class="action-btns">
+				<button id="export-btn" class="btn btn-secondary">匯出備份</button>
+				<button id="import-btn" class="btn btn-secondary">匯入備份</button>
+				<input type="file" id="import-file" accept=".json" style="display: none;">
+			</div>
+		</footer>
+	</div>
+
+	<script src="./app.js"></script>
 </body>
 </html>
