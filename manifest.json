@@ -1,4 +1,5 @@
 {
+  "id": "/swipe-notes/",
   "name": "滑動便利貼",
   "short_name": "便利貼",
   "start_url": "./index.html",
