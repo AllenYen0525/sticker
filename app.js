@@ -1,3 +1,67 @@
+// --- 側邊選單與分頁切換邏輯 ---
+const menuBtn = document.getElementById('menu-btn');
+const drawer = document.getElementById('drawer');
+const drawerOverlay = document.getElementById('drawer-overlay');
+const pageTitle = document.getElementById('page-title');
+
+const pageHome = document.getElementById('page-home');
+const pageNotes = document.getElementById('page-notes');
+
+const navHome = document.getElementById('nav-home');
+const navNotes = document.getElementById('nav-notes');
+
+function toggleDrawer(open) {
+	if (open) {
+		drawer.classList.add('active');
+		drawerOverlay.classList.add('active');
+	} else {
+		drawer.classList.remove('active');
+		drawerOverlay.classList.remove('active');
+	}
+}
+
+menuBtn.addEventListener('click', () => toggleDrawer(true));
+drawerOverlay.addEventListener('click', () => toggleDrawer(false));
+
+function switchPage(page) {
+	if (page === 'home') {
+		pageHome.classList.add('active');
+		pageNotes.classList.remove('active');
+		navHome.classList.add('active');
+		navNotes.classList.remove('active');
+		pageTitle.innerText = '主頁';
+	} else if (page === 'notes') {
+		pageHome.classList.remove('active');
+		pageNotes.classList.add('active');
+		navHome.classList.remove('active');
+		navNotes.classList.add('active');
+		pageTitle.innerText = '滑動便利貼';
+		render(); // 切換到便利貼頁面時重新繪製卡片
+	}
+	toggleDrawer(false);
+}
+
+navHome.addEventListener('click', () => switchPage('home'));
+navNotes.addEventListener('click', () => switchPage('notes'));
+
+
+// --- 學測倒數計時邏輯 ---
+function updateCountdown() {
+	// 設定學測目標日期 (可自行依需求調整月份與日期)
+	const targetDate = new Date('2027-01-20T00:00:00');
+	const now = new Date();
+	const diff = targetDate - now;
+
+	const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+	const daysElement = document.getElementById('days-count');
+	if (daysElement) {
+		daysElement.innerText = days > 0 ? days : 0;
+	}
+}
+updateCountdown();
+
+
+// --- 滑動便利貼邏輯 ---
 let notes = JSON.parse(localStorage.getItem('swipe_notes')) || [
 	{ id: Date.now(), content: '歡迎使用便利貼！左右滑動切換卡片。', color: '#fff3a0' }
 ];
@@ -15,6 +79,7 @@ function saveNotes() {
 }
 
 function render() {
+	if (!container) return;
 	container.innerHTML = '';
 	notes.forEach((note, index) => {
 		const card = document.createElement('div');
@@ -39,7 +104,9 @@ function render() {
 		container.appendChild(card);
 	});
 
-	indicator.innerText = `${currentIndex + 1} / ${notes.length}`;
+	if (indicator) {
+		indicator.innerText = `${currentIndex + 1} / ${notes.length}`;
+	}
 	updateColorPicker();
 }
 
@@ -110,7 +177,7 @@ function updateColorPicker() {
 	});
 }
 
-// 匯出功能
+// 匯出與匯入
 document.getElementById('export-btn').addEventListener('click', () => {
 	if (notes.length === 0) {
 		alert('目前沒有便利貼可以匯出！');
@@ -129,7 +196,6 @@ document.getElementById('export-btn').addEventListener('click', () => {
 	downloadAnchor.remove();
 });
 
-// 匯入功能
 const importFileInput = document.getElementById('import-file');
 
 document.getElementById('import-btn').addEventListener('click', () => {
@@ -162,6 +228,7 @@ importFileInput.addEventListener('change', (e) => {
 	importFileInput.value = '';
 });
 
+// 初始渲染
 render();
 
 // 註冊 Service Worker
