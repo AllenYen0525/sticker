@@ -21,20 +21,148 @@ body {
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	padding: 20px;
+	position: relative;
+	padding: 16px;
 }
 
+/* 頂部列與漢堡選單 */
 .app-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding-bottom: 10px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #2a2a2a;
 }
 
 .app-header h1 {
 	font-size: 1.2rem;
 	letter-spacing: 1px;
+}
+
+.menu-btn {
+	background: none;
+	border: none;
+	color: #fff;
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 4px 8px;
+}
+
+/* 側邊選單 Drawer */
+.drawer-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 90;
+	display: none;
+}
+
+.drawer-overlay.active {
+	display: block;
+}
+
+.drawer {
+	position: absolute;
+	top: 0;
+	right: -260px;
+	width: 240px;
+	height: 100%;
+	background: #1e1e1e;
+	z-index: 100;
+	padding: 24px 16px;
+	transition: right 0.3s ease;
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.drawer.active {
+	right: 0;
+}
+
+.drawer h2 {
+	font-size: 1.1rem;
+	margin-bottom: 20px;
+	color: #888;
+}
+
+.drawer ul {
+	list-style: none;
+}
+
+.drawer li {
+	margin-bottom: 12px;
+}
+
+.nav-btn {
+	width: 100%;
+	text-align: left;
+	padding: 12px 16px;
+	background: #2a2a2a;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.nav-btn.active {
+	background: #4caf50;
+	font-weight: bold;
+}
+
+/* 切換分頁控制 */
+.page-content {
+	display: none;
+	flex: 1;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-top: 16px;
+}
+
+.page-content.active {
+	display: flex;
+}
+
+/* 主頁（學測倒數）樣式 */
+#page-home {
+	justify-content: center;
+	align-items: center;
+}
+
+.countdown-card {
+	background: #1e1e1e;
+	border: 1px solid #333;
+	border-radius: 20px;
+	padding: 40px 20px;
+	text-align: center;
+	width: 90%;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.countdown-card h2 {
+	font-size: 1.1rem;
+	color: #aaa;
+	margin-bottom: 16px;
+}
+
+.countdown-days {
+	font-size: 3.5rem;
+	font-weight: bold;
+	color: #ff5252;
+	margin-bottom: 16px;
+}
+
+.quote {
+	font-size: 0.95rem;
+	color: #888;
+}
+
+/* 滑動便利貼頁面樣式 */
+.notes-header {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .indicator {
@@ -53,7 +181,7 @@ body {
 
 .card-container {
 	width: 100%;
-	height: 80%;
+	height: 90%;
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -90,18 +218,17 @@ body {
 	color: #fff;
 }
 
-.app-footer {
+.notes-footer {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	padding-top: 10px;
 }
 
 .color-picker {
 	display: flex;
 	justify-content: center;
 	gap: 12px;
-	margin-bottom: 5px;
+	margin-bottom: 4px;
 }
 
 .color-btn {
