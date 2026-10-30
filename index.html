@@ -3,45 +3,74 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	<title>滑動便利貼</title>
+	<title>學測助手</title>
 	<link rel="manifest" href="./manifest.json">
-	<meta name="theme-color" content="#1e1e1e">
+	<meta name="theme-color" content="#121212">
 	<link rel="apple-touch-icon" href="./icon.jpg">
 	<link rel="stylesheet" href="./style.css">
 </head>
 <body>
 	<div class="app-container">
+		<!-- 頂部列：包含標題與漢堡選單按鈕 -->
 		<header class="app-header">
-			<h1>Swipe Notes</h1>
-			<span id="card-indicator" class="indicator">1 / 1</span>
+			<h1 id="page-title">主頁</h1>
+			<button id="menu-btn" class="menu-btn" aria-label="開啟選單">☰</button>
 		</header>
 
-		<main class="card-viewport">
-			<div id="card-container" class="card-container">
-				<!-- 卡片會由 app.js 動態生成 -->
+		<!-- 側邊選單 Overlay -->
+		<div id="drawer-overlay" class="drawer-overlay"></div>
+		
+		<!-- 側邊選單 -->
+		<nav id="drawer" class="drawer">
+			<h2>選單</h2>
+			<ul>
+				<li><button id="nav-home" class="nav-btn active">主頁 (學測倒數)</button></li>
+				<li><button id="nav-notes" class="nav-btn">滑動便利貼</button></li>
+			</ul>
+		</nav>
+
+		<!-- 頁面 1：主頁 (學測倒數) -->
+		<main id="page-home" class="page-content active">
+			<div class="countdown-card">
+				<h2>距離學測還有</h2>
+				<div class="countdown-days"><span id="days-count">0</span> 天</div>
+				<p class="quote">堅持到底，就是你的！</p>
 			</div>
 		</main>
 
-		<footer class="app-footer">
-			<div class="color-picker">
-				<button class="color-btn yellow active" data-color="#fff3a0"></button>
-				<button class="color-btn pink" data-color="#ff7eb9"></button>
-				<button class="color-btn green" data-color="#7afcff"></button>
-				<button class="color-btn blue" data-color="#94b9ff"></button>
-				<button class="color-btn dark" data-color="#2d2d2d"></button>
+		<!-- 頁面 2：滑動便利貼 -->
+		<main id="page-notes" class="page-content">
+			<div class="notes-header">
+				<span id="card-indicator" class="indicator">1 / 1</span>
+			</div>
+			
+			<div class="card-viewport">
+				<div id="card-container" class="card-container">
+					<!-- 卡片由 app.js 動態生成 -->
+				</div>
 			</div>
 
-			<div class="action-btns">
-				<button id="delete-btn" class="btn btn-delete">刪除卡片</button>
-				<button id="add-btn" class="btn btn-add">+ 新增便利貼</button>
-			</div>
+			<div class="notes-footer">
+				<div class="color-picker">
+					<button class="color-btn yellow active" data-color="#fff3a0"></button>
+					<button class="color-btn pink" data-color="#ff7eb9"></button>
+					<button class="color-btn green" data-color="#7afcff"></button>
+					<button class="color-btn blue" data-color="#94b9ff"></button>
+					<button class="color-btn dark" data-color="#2d2d2d"></button>
+				</div>
 
-			<div class="action-btns">
-				<button id="export-btn" class="btn btn-secondary">匯出備份</button>
-				<button id="import-btn" class="btn btn-secondary">匯入備份</button>
-				<input type="file" id="import-file" accept=".json" style="display: none;">
+				<div class="action-btns">
+					<button id="delete-btn" class="btn btn-delete">刪除卡片</button>
+					<button id="add-btn" class="btn btn-add">+ 新增便利貼</button>
+				</div>
+
+				<div class="action-btns">
+					<button id="export-btn" class="btn btn-secondary">匯出備份</button>
+					<button id="import-btn" class="btn btn-secondary">匯入備份</button>
+					<input type="file" id="import-file" accept=".json" style="display: none;">
+				</div>
 			</div>
-		</footer>
+		</main>
 	</div>
 
 	<script src="./app.js"></script>
